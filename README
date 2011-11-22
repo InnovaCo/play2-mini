@@ -1,0 +1,59 @@
+provides REST API for play2 https://github.com/playframework/Play20
+
+-----
+scala
+-----
+in the global package name space
+
+object Global extends play.api.mini.Setup[com.example.App]
+ 
+and then in your own package
+
+class App extends play.api.mini.Application {
+   def route  =  {
+      case GET(Path("/coco")) & QueryString(qs) =>  Action{·
+          val o = QueryString(qs,"foo").getOrElse("noh");
+          Ok(<h1>It works!, query String {o}</h1>).as("text/html")
+      }
+    }
+}
+
+(API is based on the always awesome unfiltered lib http://unfiltered.databinder.net/Unfiltered.html ) 
+
+-----
+java
+-----
+
+object Global extends play.api.mini.SetupJava[com.example.App]
+
+and then in your own package
+
+  public class Application extends Controller {
+    @URL("/hello")
+    public static Result index() {
+        return ok("It works as text!");
+    }
+
+   @URL("/foo/&#42;/name/&#42;")
+    public static Result index2(String foo, String name) {
+        response().setContentType("/text/html");
+        return ok("It works:"+ foo +" "+name);
+   }
+ }
+
+see samples for more examples
+
+
+-----------------------
+how to build (for now)
+-----------------------
+
+git clone git://github.com/playframework/Play20.git
+cd Play20/framework
+./build publish-local
+
+git clone git@github.com:pk11/play2-mini.git
+cd play-mini
+sbt publish-local
+
+
