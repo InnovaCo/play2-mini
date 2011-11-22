@@ -6,15 +6,11 @@ Play2 Mini Project provides REST API on top of `Play2 <https://github.com/playfr
 Scala
 -----
 
-In the global package name space
-
-.. code-block:: scala
+In the global package name space::
 
   object Global extends com.typesafe.play.mini.Setup[com.example.App]
 
-and then in your own package
-
-.. code-block:: scala
+and then in your own package::
 
   class App extends com.typesafe.play.mini.Application {
      def route  =  {
@@ -30,13 +26,11 @@ The API is based on the always awesome `Unfiltered <http://unfiltered.databinder
 Java
 ----
 
-.. code-block:: scala
+In the global package name space::
 
   object Global extends com.typesafe.play.SetupJava[com.example.App]
 
-and then in your own package
-
-.. code-block:: java
+and then in your own package::
 
   public class Application extends Controller {
     @URL("/hello")
@@ -56,13 +50,15 @@ See sample apps for more examples.
 Building
 --------
 
-.. code-block:: scala
+First check out and build Play2.0::
 
   git clone git://github.com/playframework/Play20.git
   cd Play20/framework
   ./build publish-local
   cd ..
   cp -r repository/local/play ~/.ivy2/local
+
+Then check out and build Play2 Mini project::
 
   git clone git@github.com:pk11/play2-mini.git
   cd play-mini
@@ -72,7 +68,7 @@ Building
 Licence
 -------
 
-.. code-block:: scala
+The code is licensed under Apache 2 license::
 
   This software is licensed under the Apache 2 license, quoted below.
 
