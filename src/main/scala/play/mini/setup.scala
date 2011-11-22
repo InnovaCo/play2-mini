@@ -21,7 +21,7 @@ trait Application {
  * }}}
  * and then in your own package
  * {{{
- * class App extends play.api.mini.Application {
+ * class App extends com.typesafe.play.mini.Application {
  *   def route  =  {
  *      case GET(Path("/coco")) & QueryString(qs) =>  Action{ 
  *          val o = QueryString(qs,"foo").getOrElse("noh");
@@ -53,7 +53,7 @@ class Setup[T <: Application](implicit m: Manifest[T]) extends GlobalSettings {
  * example:
  * in the global package name space
  * {{{
- * object Global extends play.api.mini.SetupJava[com.example.App]
+ * object Global extends com.typesafe.play.mini.SetupJava[com.example.App]
  * }}}
  * and then in your own package
  * {{{
