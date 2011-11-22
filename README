@@ -5,7 +5,7 @@ scala
 -----
 in the global package name space
 
-object Global extends play.api.mini.Setup[com.example.App]
+object Global extends com.typesafe.play.mini.Setup[com.example.App]
  
 and then in your own package
 
@@ -24,7 +24,7 @@ class App extends play.api.mini.Application {
 java
 -----
 
-object Global extends play.api.mini.SetupJava[com.example.App]
+object Global extends com.typesafe.play.SetupJava[com.example.App]
 
 and then in your own package
 
