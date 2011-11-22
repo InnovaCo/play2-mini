@@ -51,6 +51,8 @@ how to build (for now)
 git clone git://github.com/playframework/Play20.git
 cd Play20/framework
 ./build publish-local
+cd ..
+cp -r repository/local/play ~/.ivy2/local
 
 git clone git@github.com:pk11/play2-mini.git
 cd play-mini
