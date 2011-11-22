@@ -9,12 +9,11 @@ this project demonstrates how play scales down by allowing users to utilize play
 HOW TO RUN THE APP 
 ------------------
 
-this app requires the latest version of play (not available in a repo yet),
-the easiest way to setup this demo is by installing play 2.0 https://github.com/playframework/Play20
+this app requires the latest version of play (not available in a repo yet).
 
-and then
+please see top level README for installation. Once that's done:
 
-$ sbt -Dsbt.ivy.home=/myplay2installation/repository
+$ sbt 
 
 > run 
 
