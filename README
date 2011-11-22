@@ -34,7 +34,7 @@ and then in your own package
         return ok("It works as text!");
     }
 
-   @URL("/foo/&#42;/name/&#42;")
+   @URL("/foo/*/name/*")
     public static Result index2(String foo, String name) {
         response().setContentType("/text/html");
         return ok("It works:"+ foo +" "+name);
