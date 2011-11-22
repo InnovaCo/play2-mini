@@ -1,3 +1,9 @@
+/**
+ *
+ * Copyright (C) 2011 Typesafe Inc. <http://www.typesafe.com>
+ *
+ **/
+
 package com.typesafe.play.mini
 
 import play.api.GlobalSettings
