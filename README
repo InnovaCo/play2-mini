@@ -11,7 +11,7 @@ and then in your own package
 
 class App extends play.api.mini.Application {
    def route  =  {
-      case GET(Path("/coco")) & QueryString(qs) =>  Action{re
+      case GET(Path("/coco")) & QueryString(qs) =>  Action{
           val o = QueryString(qs,"foo").getOrElse("noh")
           Ok(<h1>It works!, query String {o}</h1>).as("text/html")
       }
