@@ -7,7 +7,7 @@ import play.api.mvc.Results._
 /**
  * this application is registered via Global
  */
-class App extends Application { 
+object App extends Application { 
   def route = {
     case GET(Path("/coco")) & QueryString(qs) => Action{
       val result = QueryString(qs,"foo").getOrElse("noh")

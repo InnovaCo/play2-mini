@@ -8,11 +8,11 @@ Scala
 
 In the global package name space::
 
-  object Global extends com.typesafe.play.mini.Setup[com.example.App]
+  object Global extends com.typesafe.play.mini.Setup(com.example.App)
 
 and then in your own package::
 
-  class App extends com.typesafe.play.mini.Application {
+  object App extends com.typesafe.play.mini.Application {
      def route  =  {
         case GET(Path("/coco")) & QueryString(qs) =>  Action{
             val o = QueryString(qs,"foo").getOrElse("noh")

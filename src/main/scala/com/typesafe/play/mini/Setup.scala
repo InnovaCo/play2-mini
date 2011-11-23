@@ -23,11 +23,11 @@ trait Application {
  * example:
  * in the global package name space
  * {{{
- * object Global extends play.api.mini.Setup[com.example.App]
+ * object Global extends play.api.mini.Setup(com.example.App)
  * }}}
  * and then in your own package
  * {{{
- * class App extends com.typesafe.play.mini.Application {
+ * object App extends com.typesafe.play.mini.Application {
  *   def route  =  {
  *      case GET(Path("/coco")) & QueryString(qs) =>  Action{ 
  *          val o = QueryString(qs,"foo").getOrElse("noh");
@@ -37,13 +37,12 @@ trait Application {
  * }
  * }}}
  */
-class Setup[T <: Application](implicit m: Manifest[T]) extends GlobalSettings {
+class Setup(a: Application) extends GlobalSettings {
   
   private lazy val dispatch: PartialFunction[RequestHeader, Handler] = {
     val cl = Thread.currentThread().getContextClassLoader()
     try {
-      val clazz = m.erasure
-      clazz.getMethod("route").invoke(clazz.newInstance()).asInstanceOf[PartialFunction[RequestHeader, Handler]]
+      a.route
     } catch { case (ex: Exception) => throw new Exception("could not find Application:" + ex.toString) }
   }
 
