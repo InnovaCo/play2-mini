@@ -9,6 +9,7 @@ package com.typesafe.play.mini
 import play.api.GlobalSettings
 import play.api.mvc._
 import play.api.mvc.Results._
+import play.mvc.Http.RequestBody
 
 /**
  * an interface that a mini application needs to implement
@@ -80,28 +81,6 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
   import collection.JavaConverters._
   import play.mvc.Http.{ Context => JContext, Request => JRequest }
 
-  private def createJavaContext(req: RequestHeader) = {
-      new JContext( new JRequest {
-
-        def uri = req.uri
-        def method = req.method
-        def path = req.method
-
-        def queryString = { 
-          req.queryString.mapValues(_.toArray).asJava
-        }   
-
-        def urlFormEncoded = { 
-          Map[String,Array[String]]().asJava
-        }   
-
-        override def toString = req.toString
-
-      },  
-      req.session.data.asJava,
-      req.flash.data.asJava)
-  }
-
   private def toSimpleResult(javaContext: JContext, r: play.mvc.Result) = r.getWrappedResult match {
       case result @ SimpleResult(_, _) => {
         val wResult = result.withHeaders(javaContext.response.getHeaders.asScala.toSeq: _*)
@@ -123,8 +102,9 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
       }   
       case other => other
   } 
-  
-  private def setupRoutes(path: String,ctx: JContext) : Option[Handler] = {
+
+
+  private def setupRoutes(path: String) : Option[Handler] = {
     val methods = m.erasure.getMethods
     methods.filter(m => m.getAnnotation(classOf[URL]) != null).map { m =>
       val pattern = m.getAnnotation(classOf[URL]).value().replaceAll("\\*","(.\\*)").r
@@ -132,8 +112,23 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
       if (result.isEmpty == false) {
         val params =  result.matchData.toList.map(m=>m.subgroups).flatten.toArray
           try {
-            val simpleResult = toSimpleResult(ctx,m.invoke(null,params:_*).asInstanceOf[play.mvc.Result])
-            Some(Action{simpleResult})
+            Some(
+              Action{ request =>
+              val javaReq = request.map { anyContent =>
+                  play.core.j.JParsers.DefaultRequestBody(
+                   anyContent.asUrlFormEncoded,
+                   anyContent.asRaw,
+                   anyContent.asText,
+                   anyContent.asJson,
+                   anyContent.asXml,
+                   anyContent.asMultipartFormData
+                  )
+              }  
+              val ctx = play.core.j.Wrap.createJavaContext(javaReq)
+              JContext.current.set(ctx) 
+              toSimpleResult(ctx,m.invoke(null,params:_*).asInstanceOf[play.mvc.Result])
+              }
+              )
           } catch {case ex: Exception => ex.printStackTrace(); Some(Action{InternalServerError})}
       } else None  
     }.flatten.headOption
@@ -144,9 +139,7 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
    */
   override def onRouteRequest(request: RequestHeader): Option[Handler] = request match {
     case _ => {
-      val ctx = createJavaContext(request)
-      JContext.current.set(ctx) 
-      setupRoutes(request.uri,ctx)
+      setupRoutes(request.uri)
     }
   }
 

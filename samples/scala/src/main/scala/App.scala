@@ -9,7 +9,8 @@ import play.api.mvc.Results._
  */
 object App extends Application { 
   def route = {
-    case GET(Path("/coco")) & QueryString(qs) => Action{
+    case GET(Path("/coco")) & QueryString(qs) => Action{ request=>
+      println(request.body)
       val result = QueryString(qs,"foo").getOrElse("noh")
       Ok(<h1>It works!, query String {result}</h1>).as("text/html")
     }

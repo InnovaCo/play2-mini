@@ -16,6 +16,9 @@ public class App extends Controller {
    @URL("/coco/index")
    public static Result index() {
      response().setContentType("text/html");
+     try {
+      System.out.println(request().body());
+     } catch (Exception ex) {ex.printStackTrace();}
      return ok("It works!");
    }
 }
