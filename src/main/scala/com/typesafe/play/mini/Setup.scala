@@ -115,7 +115,7 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
             Some(
               Action{ request =>
               val javaReq = request.map { anyContent =>
-                  play.core.j.JParsers.DefaultRequestBody(
+                  play.core.j.JavaParsers.DefaultRequestBody(
                    anyContent.asUrlFormEncoded,
                    anyContent.asRaw,
                    anyContent.asText,
@@ -124,7 +124,7 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
                    anyContent.asMultipartFormData
                   )
               }  
-              val ctx = play.core.j.Wrap.createJavaContext(javaReq)
+              val ctx = play.core.j.JavaHelpers.createJavaContext(javaReq)
               JContext.current.set(ctx) 
               toSimpleResult(ctx,m.invoke(null,params:_*).asInstanceOf[play.mvc.Result])
               }
