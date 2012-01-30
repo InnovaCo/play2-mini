@@ -116,7 +116,7 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
               Action{ request =>
               val javaReq = request.map { anyContent =>
                   play.core.j.JavaParsers.DefaultRequestBody(
-                   anyContent.asUrlFormEncoded,
+                   anyContent.asFormUrlEncoded,
                    anyContent.asRaw,
                    anyContent.asText,
                    anyContent.asJson,
