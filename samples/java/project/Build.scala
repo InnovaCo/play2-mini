@@ -9,7 +9,7 @@ object MinimalBuild extends Build {
   lazy val typesafeSnapshot = "Typesafe Snapshots Repository" at "http://repo.typesafe.com/typesafe/ivy-snapshots/"
   lazy val repo = if (buildVersion.endsWith("SNAPSHOT")) typesafeSnapshot else typesafe  
 
-  lazy val root = Project(id = "play-mini-scala-sample", base = file("."), settings = Project.defaultSettings).settings(
+  lazy val root = Project(id = "play-mini-java-sample", base = file("."), settings = Project.defaultSettings).settings(
     version := buildVersion,
     organization := "my.org",
     resolvers += repo,
