@@ -23,7 +23,7 @@ and then in your own package::
 
 The API is based on the always awesome `Unfiltered <http://unfiltered.databinder.net/Unfiltered.html>`_ library.
 
-Other than this, there are many useful utilities at your fingertip, take a look at the official guide of ` Play for Scala Developers <https://github.com/playframework/Play20/wiki/ScalaHome>`_
+Other than this, there are many useful utilities at your fingertip, take a look at the official guide of `Play for Scala Developers <https://github.com/playframework/Play20/wiki/ScalaHome>`_
 
 
 
