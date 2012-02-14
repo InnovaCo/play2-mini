@@ -53,7 +53,8 @@ and then in your own package::
    }
  }
 
-Other than this, there are many useful utilities available at your fingertip, take a look at `Play Java Utils <https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ and `Async processing with Play <https://github.com/playframework/Play20/wiki/JavaAsync>`
+Other than this, there are many useful utilities available at your fingertip, take a look at `Play Java Utils <https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ 
+and `Async processing with Play <https://github.com/playframework/Play20/wiki/JavaAsync>`_
 
 
 See sample apps for more examples.
@@ -64,12 +65,12 @@ G8 Project templates
 `G8 <https://github.com/n8han/giter8>`_ project templates are available as well.
 
 
-java::
+ java::
 
 g8 pk11/play-mini-java.g8
 
 
-scala::
+ scala::
 
 g8 pk11/play-mini-scala.g8
 
