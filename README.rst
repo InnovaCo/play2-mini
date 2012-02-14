@@ -58,22 +58,19 @@ Other than this, there are many useful utilities available at your fingertip, ta
 
 See sample apps for more examples.
 
-Building
---------
+G8 Project templates
+--------------------
 
-First check out and build Play2.0::
+`G8 <https://github.com/n8han/giter8>`_ project templates are available as well.
 
-  git clone git://github.com/playframework/Play20.git
-  cd Play20/framework
-  ./build publish-local
-  cd ..
-  cp -r repository/local/play ~/.ivy2/local
+java::
 
-Then check out and build Play2 Mini project::
+g8 pk11/play-mini-java.g8
 
-  git clone git@github.com:pk11/play2-mini.git
-  cd play-mini
-  sbt publish-local
+scala::
+
+g8 pk11/play-mini-scala.g8
+
 
 
 Licence
