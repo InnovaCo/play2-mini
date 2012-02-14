@@ -63,6 +63,7 @@ G8 Project templates
 
 `G8 <https://github.com/n8han/giter8>`_ project templates are available as well.
 
+
 java::
 
 g8 pk11/play-mini-java.g8
