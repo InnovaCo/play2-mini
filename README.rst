@@ -26,8 +26,7 @@ The API is based on the always awesome `Unfiltered <http://unfiltered.databinder
 Java
 ----
 useful utilities at your fingertip ::
-` Play Java Utils <
-https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ 
+` Play Java Utils <https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ 
 
 
 In the global package name space::
