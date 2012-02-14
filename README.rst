@@ -67,6 +67,7 @@ java::
 
 g8 pk11/play-mini-java.g8
 
+
 scala::
 
 g8 pk11/play-mini-scala.g8
