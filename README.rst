@@ -25,14 +25,19 @@ The API is based on the always awesome `Unfiltered <http://unfiltered.databinder
 
 Java
 ----
+useful utilities at your fingertip ::
+` Play Java Utils <
+https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ 
+
 
 In the global package name space::
-
-  object Global extends com.typesafe.play.SetupJava[com.example.App]
+  //Global.scala
+  object Global extends com.typesafe.play.mini.SetupJavaApplicationFor[com.example.App]
 
 and then in your own package::
+  package com.example;
 
-  public class Application extends Controller {
+  public class App extends Controller {
     @URL("/hello")
     public static Result index() {
         return ok("It works as text!");

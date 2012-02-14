@@ -59,7 +59,7 @@ class Setup(a: Application) extends GlobalSettings {
  * example:
  * in the global package name space
  * {{{
- * object Global extends com.typesafe.play.mini.SetupJava[com.example.App]
+ *  object Global extends com.typesafe.play.mini.SetupJavaApplicationFor[com.example.App]
  * }}}
  * and then in your own package
  * {{{
@@ -76,32 +76,12 @@ class Setup(a: Application) extends GlobalSettings {
  * }
  * }}}
  */
-class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends GlobalSettings {
+class SetupJavaApplicationFor[T <: play.mvc.Controller](implicit m: Manifest[T]) extends GlobalSettings with play.core.j.JavaHelpers{
 
   import collection.JavaConverters._
   import play.mvc.Http.{ Context => JContext, Request => JRequest }
 
-  private def toSimpleResult(javaContext: JContext, r: play.mvc.Result) = r.getWrappedResult match {
-      case result @ SimpleResult(_, _) => {
-        val wResult = result.withHeaders(javaContext.response.getHeaders.asScala.toSeq: _*)
-
-        if (javaContext.session.isDirty && javaContext.flash.isDirty) {
-          wResult.withSession(Session(javaContext.session.asScala.toMap)).flashing(Flash(javaContext.flash.asScala.toMap))
-        } else {
-          if (javaContext.session.isDirty) {
-            wResult.withSession(Session(javaContext.session.asScala.toMap))
-          } else {
-            if (javaContext.flash.isDirty) {
-              wResult.flashing(Flash(javaContext.flash.asScala.toMap))
-            } else {
-              wResult
-            }   
-          }   
-        }   
-
-      }   
-      case other => other
-  } 
+  
 
 
   private def setupRoutes(path: String) : Option[Handler] = {
@@ -124,9 +104,9 @@ class SetupJava[T <: play.mvc.Controller](implicit m: Manifest[T]) extends Globa
                    anyContent.asMultipartFormData
                   )
               }  
-              val ctx = play.core.j.JavaHelpers.createJavaContext(javaReq)
+              val ctx = createJavaContext(javaReq)
               JContext.current.set(ctx) 
-              toSimpleResult(ctx,m.invoke(null,params:_*).asInstanceOf[play.mvc.Result])
+              createResult(ctx,m.invoke(null,params:_*).asInstanceOf[play.mvc.Result])
               }
               )
           } catch {case ex: Exception => ex.printStackTrace(); Some(Action{InternalServerError})}
