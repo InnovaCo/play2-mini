@@ -23,11 +23,12 @@ and then in your own package::
 
 The API is based on the always awesome `Unfiltered <http://unfiltered.databinder.net/Unfiltered.html>`_ library.
 
+Other than this, there are many useful utilities at your fingertip, take a look at the official guide of ` Play for Scala Developers <https://github.com/playframework/Play20/wiki/ScalaHome>`_
+
+
+
 Java
 ----
-useful utilities at your fingertip ::
-` Play Java Utils <https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_ 
-
 
 In the global package name space::
   //Global.scala
@@ -48,6 +49,9 @@ and then in your own package::
         return ok("It works:"+ foo +" "+name);
    }
  }
+
+Other than this, there are many useful utilities at your fingertip, take a look at ` Play Java Utils <https://github.com/playframework/Play20/tree/master/framework/src/play/src/main/java/play/libs>`_
+
 
 See sample apps for more examples.
 
