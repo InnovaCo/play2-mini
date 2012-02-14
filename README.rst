@@ -31,10 +31,13 @@ Java
 ----
 
 In the global package name space::
+
   //Global.scala
   object Global extends com.typesafe.play.mini.SetupJavaApplicationFor[com.example.App]
 
 and then in your own package::
+
+  //com/example/App.java
   package com.example;
 
   public class App extends Controller {
