@@ -3,7 +3,7 @@ import Keys._
 
 object MinimalBuild extends Build {
   
-  lazy val buildVersion =  "2.0-RC1"
+  lazy val buildVersion =  "2.0-RC3-SNAPSHOT"
   
   lazy val typesafePub = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/ivy-releases/"
   lazy val typesafeSnapshotPub = "Typesafe Snapshots Repository" at "http://repo.typesafe.com/typesafe/ivy-snapshots/"
@@ -21,13 +21,6 @@ object MinimalBuild extends Build {
     organization := "com.typesafe",
     resolvers += repo,
     libraryDependencies += play,
-    mainClass in (Compile, run) := Some("play.core.server.NettyServer"),
-    ivyXML :=
-      <dependencies>
-        <dependency org="maven-plugins" name="maven-plugins" rev="1.3.1">
-          <exclude module="maven-cobertura-plugin"/>
-          <exclude module="maven-findbugs-plugin"/>
-        </dependency>
-      </dependencies>
+    mainClass in (Compile, run) := Some("play.core.server.NettyServer")
   )
 }
