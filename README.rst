@@ -18,10 +18,40 @@ and then in your own package::
             val o = QueryString(qs,"foo").getOrElse("noh")
             Ok(<h1>It works!, query String {o}</h1>).as("text/html")
         }
+        case GET(Path("/flowers")) =>  Action{
+            Ok(<h1>It works for flowers!</h1>).as("text/html")
+        }
       }
   }
 
 The API is based on the always awesome `Unfiltered <http://unfiltered.databinder.net/Unfiltered.html>`_ library.
+
+Extending the Extractor based approach with regex or simple matching is possible too::
+
+  object App extends com.typesafe.play.mini.Application {
+    def route = Routes(
+      Through("/people/(.*)".r) {groups: List[String] =>
+        Action{ 
+          val id :: Nil = groups
+          Ok(<h1>It works with regex!, id: {id}</h1>).as("text/html") 
+        }
+      }, 
+      {case GET(Path("/coco")) & QueryString(qs) => Action{ request =>
+          println(request.body)
+          println(play.api.Play.current)
+          val result = QueryString(qs,"foo").getOrElse("noh")
+          Ok(<h1>It works!, query String {result}</h1>).as("text/html") }
+      },
+        Through("/flowers/id/") {groups: List[String] =>
+          Action{ 
+            val id :: Nil = groups
+            Ok(<h1>It works with simple startsWith! -  id: {id}</h1>).as("text/html") 
+          }
+        }
+    )   
+  }
+
+for more information on extractors, regex and Routes, please `see <https://github.com/typesafehub/play2-mini/tree/master/src/main/scala/com/typesafe/play/mini>`_
 
 Other than this, there are many useful utilities available at your fingertip, take a look at the official guide of `Play for Scala Developers <https://github.com/playframework/Play20/wiki/ScalaHome>`_
 
@@ -67,12 +97,12 @@ G8 Project templates
 
  java::
 
-g8 pk11/play-mini-java.g8
+  g8 pk11/play-mini-java.g8
 
 
  scala::
 
-g8 pk11/play-mini-scala.g8
+  g8 pk11/play-mini-scala.g8
 
 
 
