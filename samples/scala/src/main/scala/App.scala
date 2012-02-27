@@ -15,11 +15,16 @@ object App extends Application {
       	Ok(<h1>It works with regex!, id: {id}</h1>).as("text/html")	
       }
   	}, 
-    {case GET(Path("/coco")) & QueryString(qs) => Action{ request =>
+    {
+    case GET(Path("/coco")) & QueryString(qs) => Action{ request =>
         println(request.body)
         println(play.api.Play.current)
         val result = QueryString(qs,"foo").getOrElse("noh")
         Ok(<h1>It works!, query String {result}</h1>).as("text/html") }
+
+    case GET(Path("/cocoa")) => Action{ request =>
+        Ok(<h1>It works with extractors!</h1>).as("text/html") }
+        
   	},
       Through("/flowers/id/") {groups: List[String] =>
         Action{ 
