@@ -15,8 +15,8 @@ import org.jboss.netty.handler.codec.http.QueryStringDecoder
  * from the awesome unfiltered library http://unfiltered.databinder.net/Unfiltered.html
  */
 object Path {
-  def unapply(req: RequestHeader) = Some(req.uri.split('?')(0))
-  def apply(req: RequestHeader) = req.uri.split('?')(0)
+  def unapply(req: RequestHeader) = Some(req.path)
+  def apply(req: RequestHeader) = req.path
 }
 
 /**
@@ -33,6 +33,52 @@ object QueryString {
   }  
 }
 
+/**
+  * provides alternative routing mechanism where 
+  **/
+object Through {
+
+ 
+ /**
+  * for incomig url: /people/25 
+  * {{{ 
+  * def route = Through("/people/(.*)".r) { (groups: List[String]) => 
+  *     Action{
+  *       val id :: Nil = groups
+  *       Ok("current id:"+id)
+  *     }
+  *   } orElse {
+  *       case GET(Path("/internalnotgoinganywhere")) => Action{Ok("yay")}
+  *   }
+  * }
+  * }}}
+*/
+  def apply(regex: scala.util.matching.Regex)(rf: List[String] => Handler): PartialFunction[RequestHeader, Handler] = {
+   case rh: RequestHeader if regex.findFirstMatchIn(Path(rh)).isDefined => 
+    rf(regex.unapplySeq(Path(rh)).getOrElse(Nil))
+  }
+
+ /**
+  * for incomig url: /people/my/current/25
+  * {{{
+  * def route = Through("/people/"){ (groups: List[String]) => 
+  *    Action{
+  *       val "my" :: "current" :: id = groups
+  *       Ok("current id:"+id)
+  *     }
+  *   } orElse {
+  *       case GET(Path("/internalnotgoinganywhere")) => Action{Ok("yay")}
+  *   }
+  * }
+  * }}}
+*/
+ def apply(baseUrl: String)(rf: List[String] => Handler): PartialFunction[RequestHeader, Handler] = {
+      case rh: RequestHeader if Path(rh).startsWith(baseUrl) => 
+       val groups = Path(rh).split(baseUrl)(1).split("/").toList
+       rf(groups)
+  }
+ 
+}
 /**
  * path segment
  */ 
