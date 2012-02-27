@@ -51,7 +51,7 @@ Extending the Extractor based approach with regex or simple matching is possible
     )   
   }
 
-for more information on extractors, regex and Routes, please `see <https://github.com/typesafehub/play2-mini/tree/master/src/main/scala/com/typesafe/play/mini>`_
+for more information about extractors, regex and Routes, please `see <https://github.com/typesafehub/play2-mini/tree/master/src/main/scala/com/typesafe/play/mini>`_
 
 Other than this, there are many useful utilities available at your fingertip, take a look at the official guide of `Play for Scala Developers <https://github.com/playframework/Play20/wiki/ScalaHome>`_
 
