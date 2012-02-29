@@ -3,7 +3,7 @@ package com.typesafe.mini.j;
 import java.util.concurrent.Callable;
 
 /**
- * produces a callable that takes an argument in its call method
+ * produces a callable that takes an argument 
  * http://www.programmingforums.org/post187357-4.html
  */
 public abstract class Callable1<TIn, TOut> {
