@@ -13,7 +13,7 @@ public abstract class Callable1<TIn, TOut> {
      * @param argument that's trasnformed into TOut
      * @return a TOut class
      */
-    protected abstract TOut operate(TIn arg) throws Exception;
+    protected abstract TOut operateOn(TIn arg) throws Exception;
     
     /**
      * produces the callable 
@@ -24,7 +24,7 @@ public abstract class Callable1<TIn, TOut> {
        final TIn foo = arg;  
        return  new Callable<TOut>() {
             public TOut call() throws Exception {
-                return operate(foo);
+                return operateOn(foo);
             }
         };
     }
