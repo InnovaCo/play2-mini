@@ -15,7 +15,7 @@ public class ActorAction {
    * @param f to be executed upon replying
    * @return a play.mvc.Results.AsyncResult that wraps the akka result 
    */
-  public play.mvc.Results.AsyncResult async(ActorRef actorRef, java.lang.Object msg, Timeout timeout, final Callable1<java.lang.Object, play.mvc.Result> f ) {
+  public static play.mvc.Results.AsyncResult async(ActorRef actorRef, java.lang.Object msg, Timeout timeout, final Callable1<java.lang.Object, play.mvc.Result> f ) {
 
     return play.mvc.Results.async( 
       play.libs.Akka.asPromise(ask(actorRef,msg, timeout)).map(
