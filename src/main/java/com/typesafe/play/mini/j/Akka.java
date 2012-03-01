@@ -11,8 +11,8 @@ public class Akka {
    * provides a way to map an actor ask call onto a java AsyncResult 
    * example usage:
    * public static Result index(String coco, String name) {
-   *    Akka.async(myActor,new Message, system.settings().ActorTimeout()), new Callable1<String,play.mvc.Result> {
-   *       protected abstract TOut operateOn(TIn arg) {
+   *    Akka.async(myActor,new Message, system.settings().ActorTimeout()), new Callable1<Object,play.mvc.Result> {
+   *       protected abstract play.mvc.Result operateOn(Object arg) {
    *          return ok(arg.toString());
    *       }
    *    }); 
