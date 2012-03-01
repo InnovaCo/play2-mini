@@ -5,10 +5,18 @@ import akka.util.Timeout;
 import akka.actor.ActorRef;
 import static com.typesafe.mini.j.Sneak.sneakyThrow;
 
-public class ActorAction {
+public class Akka {
 
  /**
    * provides a way to map an actor ask call onto a java AsyncResult 
+   * example usage:
+   * public static Result index(String coco, String name) {
+   *    Akka.async(myActor,new Message, system.settings().ActorTimeout()), new Callable1<String,play.mvc.Result> {
+   *       protected abstract TOut operateOn(TIn arg) {
+   *          return ok(arg.toString());
+   *       }
+   *    }); 
+   * }
    * @param actorRef actor
    * @param msg message to send
    * @param timeout defaults to 5 sec
