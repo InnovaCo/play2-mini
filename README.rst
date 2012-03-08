@@ -47,6 +47,11 @@ Extending the Extractor based approach with regex or simple matching is possible
             val id :: Nil = groups
             Ok(<h1>It works with simple startsWith! -  id: {id}</h1>).as("text/html") 
           }
+        },
+        Through("/flowers/id/") {groups: List[String] =>
+          ActorAction[String](myActor, Car) {reply: String =>
+            Ok(reply) 
+          }
         }
     )   
   }
